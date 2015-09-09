@@ -1,15 +1,21 @@
 {
-  "name": "grunt-ftp-deploy",
+  "name": "grunt-ftp-deep",
   "description": "Deployment over FTP",
-  "version": "0.1.10",
-  "homepage": "https://github.com/zonak/grunt-ftp-deploy",
-  "author": {
-    "name": "Zoran Nakev",
-    "email": "zoran.nakev@gmail.com"
-  },
+  "version": "0.1.11",
+  "homepage": "https://github.com/ikun/grunt-ftp-deploy",
+  "author": [
+    {
+      "name": "Zoran Nakev",
+      "email": "zoran.nakev@gmail.com"
+    },
+    {
+      "name": "ikuner",
+      "email": "1kun@sohu.com"
+    }
+  ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/zonak/grunt-ftp-deploy.git"
+    "url": "git@github.com:ikun/grunt-ftp-deploy.git"
   },
   "bugs": {
     "url": "https://github.com/zonak/grunt-ftp-deploy/issues"

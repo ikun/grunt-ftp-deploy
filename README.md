@@ -1,4 +1,6 @@
-# grunt-ftp-deploy [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
+# grunt-ftp-deep
+
+copy from [grunt-ftp-deep](https://www.npmjs.com/package/grunt-ftp-deploy).
 
 This is a [grunt](https://github.com/gruntjs/grunt) task for code deployment over the _ftp_ protocol.
 
@@ -88,6 +90,7 @@ This task is built by taking advantage of the great work of Sergi Mansilla and h
 
 ## Release History
 
+ * 2015-10-09    v0.1.11   check and create base path
  * 2015-02-04    v0.1.10   An option to force output verbosity.
  * 2014-10-22    v0.1.9    Log successful uploads only in verbose mode.
  * 2014-10-13    v0.1.8    Allow empty strings to be used as login details.
@@ -98,12 +101,3 @@ This task is built by taking advantage of the great work of Sergi Mansilla and h
  * 2014-05-05    v0.1.3    Added warning if an `authKey` is provided and no `.ftppass` is found.
  * 2013-11-22    v0.1.1    Added compatibility with `grunt` _0.4.2_ and switched to `jsftp` _1.2.x_.
  * 2013-08-26    v0.1.0    Switched to `jsftp` _1.1.x_.
-
-[npm-url]: https://npmjs.org/package/grunt-ftp-deploy
-[npm-image]: https://badge.fury.io/js/grunt-ftp-deploy.png
-
-[travis-url]: http://travis-ci.org/zonak/grunt-ftp-deploy
-[travis-image]: https://secure.travis-ci.org/zonak/grunt-ftp-deploy.png?branch=master
-
-[depstat-url]: https://david-dm.org/zonak/grunt-ftp-deploy
-[depstat-image]: https://david-dm.org/zonak/grunt-ftp-deploy.png
