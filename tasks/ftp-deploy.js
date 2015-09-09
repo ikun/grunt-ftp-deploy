@@ -72,6 +72,39 @@ module.exports = function (grunt) {
     return result;
   }
 
+  // 循环准备远端基础目录结构
+  function fmkdBasePath( basePath, deep, callback ) {
+    if(arguments.length === 2){
+      callback = deep;
+      deep = 1;
+    }
+    var abasePath = basePath.split('/');
+    abasePath = _.compact(abasePath);
+    if(deep > abasePath.length){
+      log.ok('基础目录结构创建完毕');
+      callback(null);
+      return;
+    }
+    // 当前要创建的目录
+    var nowPath = '/'+abasePath.slice(0, deep ).join('/')+'/';
+    deep += 1;
+    ftp.raw.cwd(nowPath, function (err) {
+      if(err){
+        ftp.raw.mkd(nowPath, function (err) {
+          if(err) {
+            log.error('Error creating new remote folder ' + nowPath + ' --> ' + err);
+            callback (err);
+          } else {
+            log.ok('New remote folder created ' + nowPath.yellow);
+            fmkdBasePath(basePath, deep, callback);
+          }
+        });
+      } else {
+        fmkdBasePath(basePath, deep, callback);
+      }
+    });
+  }
+
   // A method for changing the remote working directory and creating one if it doesn't already exist
   function ftpCwd (inPath, cb) {
     ftp.raw.cwd(inPath, function (err) {
@@ -193,15 +226,18 @@ module.exports = function (grunt) {
           grunt.warn('Authentication ' + err);
         }
 
-        // Iterating through all location from the `localRoot` in parallel
-        async.eachSeries(locations, ftpProcessLocation, function () {
-          ftp.raw.quit(function (err) {
-            if (err) {
-              log.error(err);
-            } else {
-              log.ok('FTP upload done!');
-            }
-            done();
+        var baseServicePath = path.normalize('/' + remoteRoot + '/').replace(/\\/gi, '/');
+        fmkdBasePath(baseServicePath, function( err ) {
+          // Iterating through all location from the `localRoot` in parallel
+          async.eachSeries(locations, ftpProcessLocation, function () {
+            ftp.raw.quit(function (err) {
+              if (err) {
+                log.error(err);
+              } else {
+                log.ok('FTP upload done!');
+              }
+              done();
+            });
           });
         });
       });
